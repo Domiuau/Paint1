@@ -24,7 +24,6 @@ public class PainelFolha extends JPanel implements MouseListener, MouseMotionLis
 
     private ArrayList<PainelDesenho> painelDesenhos = new ArrayList<>();
     public static BasicStroke basicStroke = new BasicStroke(2);
-    public static boolean editStroke = true;
 
     private int xAntigo, yAntigo, xAtual, yAtual, xAntigoForma, yAntigoForma;
 
@@ -387,7 +386,6 @@ public class PainelFolha extends JPanel implements MouseListener, MouseMotionLis
 
     @Override
     public void focusGained(FocusEvent e) {
-      editStroke = true;
       PainelDesenho.painelDesenhoFoco = null;
       PainelStrokeAjuste.getjSlider().setValue((int) basicStroke.getLineWidth());
         System.out.println("a");
@@ -395,7 +393,6 @@ public class PainelFolha extends JPanel implements MouseListener, MouseMotionLis
 
     @Override
     public void focusLost(FocusEvent e) {
-        editStroke = false;
         quadrado = null;
         System.out.println("b");
     }

@@ -44,7 +44,12 @@ public class BotaoAjuste extends JButton implements MouseMotionListener, MouseLi
 
 
         this.direcaoAjuste.direcao(jComponent.getParent().getMousePosition(),this);
-        PainelDesenho.painelDesenhoFoco = (PainelDesenho) jComponent;
+        try {
+            PainelDesenho.painelDesenhoFoco = (PainelDesenho) jComponent;
+
+        } catch (Exception exception){
+
+        }
 
     }
 

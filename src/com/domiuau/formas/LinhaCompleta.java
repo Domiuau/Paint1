@@ -61,6 +61,7 @@ public class LinhaCompleta implements Desenhavel {
 
     }
 
+
     @Override
     public BasicStroke getStroke() {
         return basicStroke;

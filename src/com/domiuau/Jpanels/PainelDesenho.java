@@ -13,7 +13,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class PainelDesenho extends JLayeredPane implements Ajustavel, MouseMotionListener, MouseListener {
+public class PainelDesenho extends JLayeredPane implements Ajustavel, MouseMotionListener, MouseListener, FocusListener {
 
     public static PainelDesenho painelDesenhoFoco;
     int x1,y1;
@@ -43,29 +43,13 @@ public class PainelDesenho extends JLayeredPane implements Ajustavel, MouseMotio
         this.setBounds(rectangle);
         this.desenhavel = desenhavel;
         this.setVisible(true);
-        this.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                PainelStrokeAjuste.getjSlider().setValue((int) desenhavel.getStroke().getLineWidth());
-                animar = true;
-                animar();
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-
-                animar = false;
-                animacao.interrupt();
-                repaint();
-
-            }
-        });
-        repaint();
+        this.addFocusListener(this);
         this.rectangle = rectangle;
         this.setAjuste(this, true, true, true, true, true, true, true, true);
 
         painelDesenhoFoco = this;
-        repaint();
+
+        this.requestFocus();
 
 
     }
@@ -184,7 +168,7 @@ public class PainelDesenho extends JLayeredPane implements Ajustavel, MouseMotio
         this.requestFocus();
 
 
-            animacao.interrupt();
+          //  animacao.interrupt();
 
 
 
@@ -214,6 +198,24 @@ public class PainelDesenho extends JLayeredPane implements Ajustavel, MouseMotio
 
     }
 
+    @Override
+    public void focusGained(FocusEvent e) {
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        PainelStrokeAjuste.getjSlider().setValue((int) desenhavel.getStroke().getLineWidth());
+        PainelStroke.strokeSelecionada = desenhavel.getStroke();
+        animar = true;
+        animar();
+    }
+
+    @Override
+    public void focusLost(FocusEvent e) {
+
+        animar = false;
+        animacao.interrupt();
+        repaint();
+
+    }
+
     public void animar(){
 
         if (animacao != null) {
@@ -221,8 +223,13 @@ public class PainelDesenho extends JLayeredPane implements Ajustavel, MouseMotio
         }
 
         if (animar) {
-            animacao = new Thread(new AnimacaoFoco(this.getGraphics(),this));
-            animacao.start();
+            try {
+                animacao = new Thread(new AnimacaoFoco(this.getGraphics(),this));
+                animacao.start();
+            } catch (Exception e) {
+
+            }
+
         }
 
 
