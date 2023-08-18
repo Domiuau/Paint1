@@ -9,6 +9,9 @@ public interface Desenhavel {
 
     public void setX(int x);
     public void setY(int y);
+    int getX ();
+    int getY ();
+    Image getImage();
 
     public BasicStroke getStroke();
 

@@ -6,6 +6,7 @@ import com.domiuau.Jpanels.cores.PainelCores;
 import com.domiuau.Jpanels.stroke.PainelStroke;
 import com.domiuau.Jpanels.stroke.PainelStrokeAjuste;
 import com.domiuau.desenhos.*;
+import com.domiuau.formas.Imagem;
 import com.domiuau.formas.LinhaCompleta;
 import com.domiuau.formas.Linhas;
 import com.domiuau.formas.Quadrado;
@@ -42,7 +43,7 @@ public class PainelFolha extends JPanel implements MouseListener, MouseMotionLis
 
     int forma = 0;
 
-    PainelFolha() {
+    PainelFolha(Image image) {
         this.setBounds(0,150, 1000,700);
        // this.setPreferredSize(new Dimension(1920,1080));
         this.setBackground(Color.white);
@@ -52,6 +53,7 @@ public class PainelFolha extends JPanel implements MouseListener, MouseMotionLis
         this.addFocusListener(this);
         this.setLayout(null);
         this.setAjuste(this,false,false,false,true ,true ,true,false,false);
+        formasProntas.add(new Imagem(image,0,0));
 
 
 
@@ -94,6 +96,14 @@ public class PainelFolha extends JPanel implements MouseListener, MouseMotionLis
                 ((Graphics2D) graphics).setStroke(forma.getStroke());
                 ((Graphics2D) graphics).setColor(((Quadrado) forma).getColor());
                 ((Graphics2D) graphics).drawOval(((Quadrado) forma).getX(),((Quadrado) forma).getY(),((Quadrado) forma).getWidth(),((Quadrado) forma).getHeight());
+            }
+        });
+
+        desenhoPaints.add(new DesenhoPaint() {
+            @Override
+            public void desenharFormaPaint(Graphics graphics, Desenhavel forma) {
+                graphics.drawImage(forma.getImage(), forma.getX(), forma.getY(), null);
+
             }
         });
 
@@ -337,6 +347,9 @@ public class PainelFolha extends JPanel implements MouseListener, MouseMotionLis
             revalidate();
 
         }
+
+        if ((e.getKeyChar()+"").equals("q"))
+            this.add(new PainelSaida(this));
 
 
 

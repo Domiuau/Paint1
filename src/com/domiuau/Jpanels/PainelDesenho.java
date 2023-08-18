@@ -1,7 +1,6 @@
 package com.domiuau.Jpanels;
 
 import com.domiuau.Jpanels.ajustavel.Ajustavel;
-import com.domiuau.Jpanels.cores.BotaoCor;
 import com.domiuau.Jpanels.stroke.PainelStroke;
 import com.domiuau.Jpanels.stroke.PainelStrokeAjuste;
 import com.domiuau.desenhos.Desenhavel;
@@ -11,7 +10,6 @@ import com.domiuau.threads.AnimacaoFoco;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 public class PainelDesenho extends JLayeredPane implements Ajustavel, MouseMotionListener, MouseListener, FocusListener {
 
@@ -23,7 +21,6 @@ public class PainelDesenho extends JLayeredPane implements Ajustavel, MouseMotio
     private Desenhavel desenhavel;
     private Rectangle rectangle;
     private Thread animacao;
-    private AnimacaoFoco animacaoFoco;
     private Graphics g;
     public Desenhavel getDesenhavel() {
         return this.desenhavel;
@@ -47,6 +44,7 @@ public class PainelDesenho extends JLayeredPane implements Ajustavel, MouseMotio
         this.rectangle = rectangle;
         this.setAjuste(this, true, true, true, true, true, true, true, true);
 
+
         painelDesenhoFoco = this;
 
         this.requestFocus();
@@ -67,13 +65,14 @@ public class PainelDesenho extends JLayeredPane implements Ajustavel, MouseMotio
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        this.g = g;
+      //  this.g = g;
 
         ((Quadrado) desenhavel).setX(3 + ((int) desenhavel.getStroke().getLineWidth()/2));
         ((Quadrado) desenhavel).setY(3 + ((int) desenhavel.getStroke().getLineWidth()/2));
         ((Quadrado) desenhavel).setWidth((this.getWidth() - 6) - ((int) desenhavel.getStroke().getLineWidth()));
         ((Quadrado) desenhavel).setHeight((this.getHeight() - 6) - ((int) desenhavel.getStroke().getLineWidth()));
         PainelFolha.desenhoPaints.get(desenhavel.getTipo()).desenharFormaPaint(g,desenhavel);
+
 
 
 
@@ -166,9 +165,7 @@ public class PainelDesenho extends JLayeredPane implements Ajustavel, MouseMotio
         this.animar = false;
         painelDesenhoFoco = this;
         this.requestFocus();
-
-
-          //  animacao.interrupt();
+        //animacao.interrupt();
 
 
 
@@ -183,7 +180,7 @@ public class PainelDesenho extends JLayeredPane implements Ajustavel, MouseMotio
         desenhavel.setX(this.getX());
         desenhavel.setY(this.getY());
         animar = true;
-        animar();
+        repaint();
 
 
     }
@@ -204,7 +201,7 @@ public class PainelDesenho extends JLayeredPane implements Ajustavel, MouseMotio
         PainelStrokeAjuste.getjSlider().setValue((int) desenhavel.getStroke().getLineWidth());
         PainelStroke.strokeSelecionada = desenhavel.getStroke();
         animar = true;
-        animar();
+          repaint();
     }
 
     @Override
@@ -217,7 +214,7 @@ public class PainelDesenho extends JLayeredPane implements Ajustavel, MouseMotio
     }
 
     public void animar(){
-
+//
         if (animacao != null) {
             animacao.interrupt();
         }
@@ -230,6 +227,7 @@ public class PainelDesenho extends JLayeredPane implements Ajustavel, MouseMotio
 
             }
 
+            animar = false;
         }
 
 
@@ -239,6 +237,8 @@ public class PainelDesenho extends JLayeredPane implements Ajustavel, MouseMotio
     public PainelDesenho getPainelDesenho(){
         return this;
     }
+
+
 
 
 

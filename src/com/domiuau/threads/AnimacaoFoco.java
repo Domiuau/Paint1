@@ -39,7 +39,7 @@ public class AnimacaoFoco implements Runnable {
     @Override
     public void run() {
 
-        synchronized (this) {
+
             Color cor1 = Color.BLACK;
             Color cor2 = Color.WHITE;
 
@@ -91,12 +91,12 @@ public class AnimacaoFoco implements Runnable {
                 try {
                     Thread.sleep(300);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    break;
 
                 }
 
 
-            }
+
         }
 
 

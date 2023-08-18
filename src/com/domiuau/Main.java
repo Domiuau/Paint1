@@ -3,8 +3,10 @@ package com.domiuau;
 import com.domiuau.Jpanels.PainelFolha;
 import com.domiuau.Jpanels.PainelPrincipal;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class Main extends JFrame {
 
@@ -19,9 +21,16 @@ public class Main extends JFrame {
         main.setVisible(true);
         main.setLocationRelativeTo(null);
         main.setLayout(new BorderLayout());
+        Image image = null;
+        try {
+             image = ImageIO.read(new File("src/download (2).png"));
+        } catch (Exception e){
+            System.out.println("dfgdfgdgdfgdfgdgdgd");
+        }
 
 
-        main.add(new PainelPrincipal());
+
+        main.add(new PainelPrincipal(image));
 
 
 

@@ -89,6 +89,11 @@ public class Quadrado implements Desenhavel {
     }
 
     @Override
+    public Image getImage() {
+        return null;
+    }
+
+    @Override
     public void setX(int x) {
         this.x = x;
     }

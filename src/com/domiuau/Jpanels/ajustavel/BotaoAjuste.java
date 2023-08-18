@@ -66,12 +66,15 @@ public class BotaoAjuste extends JButton implements MouseMotionListener, MouseLi
     @Override
     public void mousePressed(MouseEvent e) {
 
-        jComponent.requestFocus();
+        jComponent.getParent().requestFocus();
+
+
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
 
+        jComponent.requestFocus();
 
     }
 

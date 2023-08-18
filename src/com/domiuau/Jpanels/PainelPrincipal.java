@@ -8,17 +8,12 @@ import java.awt.*;
 public class PainelPrincipal extends JPanel {
 
     private static PainelFolha painelFolha;
-    public PainelPrincipal() {
+    public PainelPrincipal(Image image) {
 
         this.setBackground(new Color(213, 243, 235));
         this.setLayout(null);
-
-
-
-
-
         this.add(new PainelOpcoes());
-        painelFolha = new PainelFolha();
+        painelFolha = new PainelFolha(image);
         this.add(painelFolha, BorderLayout.CENTER);
         this.revalidate();
 
