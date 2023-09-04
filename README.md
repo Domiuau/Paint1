@@ -1,7 +1,7 @@
 # Sobre o projeto
 
 A aplicação consiste em uma réplica do paint, com algumas funções a mais e outras a menos
-Projeto em desenvolvimento
+- Projeto em desenvolvimento
 
 # Aberto junto a outra imagem
 
